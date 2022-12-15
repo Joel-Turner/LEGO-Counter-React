@@ -1,0 +1,33 @@
+@use '../../styles/colors';
+@use '../../styles/layout';
+@use '../../styles/mixins';
+
+.clicker {
+    margin:0px auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: colors.$greyLighter2;
+    border: 10px;
+    border-radius: 5%;
+
+    // .redButton {
+        // background-color: red;
+        // margin: 0px auto;
+        // display: block;
+    // }
+
+    p {
+        text-align: center;
+    }
+    .buttonImage{
+        padding: 20px;
+        img{
+            margin: 0px auto;
+            width: 100%;
+            max-width: 500px;
+            cursor: pointer;
+        }
+    }
+
+}

@@ -1,0 +1,24 @@
+@use '../../styles/colors';
+@use '../../styles/layout';
+@use '../../styles/mixins';
+
+.upgradeShop{
+    margin:0px auto;
+    width: 100%;
+    max-width: 500px;
+    background-color: colors.$greyLighter2;
+    padding: 10px ;
+    max-height: 100%;
+    border: 10px;
+    border-radius: 10%;
+
+    p {
+        margin:-50px 150px ;
+        width: 100%;
+        max-width: 350px;
+        padding: 10px;
+        max-height: 100%;
+        font-size: 15px;
+        line-height: 15px;
+    }
+}

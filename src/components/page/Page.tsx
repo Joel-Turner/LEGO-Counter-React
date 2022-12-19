@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../footer/Footer';
 import Navbar from '../navbar/Navbar';
 import styles from './page.module.scss';
+import { Link } from 'react-router-dom';
 
 interface Props {
   title: string;
@@ -33,6 +34,11 @@ const Page = (props: Props): JSX.Element => {
           rel="apple-touch-icon"
           sizes="180x180"
           href="/apple-touch-icon.png"
+        />
+        <link
+          rel="bgimage"
+          type="image/jpg"
+          href="/bgimage.jpg"
         />
       </div>
       <script async src="https://kit.fontawesome.com/c6e566ba48.js" />

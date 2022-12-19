@@ -18,28 +18,44 @@ interface Props {
 const Clicker = (props:Props) => {
 
     const [displayNum, setDisplayNum] = useState<number>(0)
+    const [timerTime, setTimerTime] = useState<number>(0)
+    const [displayClicks, setDisplayClicks] = useState<number>(0)
+
+    
 
     useEffect(() => {
         console.log("Page Loaded")
+
+        const IID = setInterval(() => {
+            setTimerTime(previous => previous + 1)
+        }, 500)
     }, [])
+
+    if (timerTime === 2) {
+        setTimerTime(previous => 0)
+    }
+
+
 
     const onButtonPress = () => {
         props.setTimesClicked(previous => previous + props.clickIncrement)
     }
 
     const autoclick = () => {
-        props.setTimesClicked(previous => previous + 0.25)
+        props.setTimesClicked(previous => previous + 1)
     }
 
     if (props.ifAutoclick === true) {
         
-        if (props.activateOnce === false){
+        if (timerTime === 1){
             props.setActivateOnce(previous => true)
             const intervalID = setInterval(() => {
-                autoclick()
-              }, 1000);
+            autoclick()
+            }, 1000);
             console.log("Hello World")
+            props.setIfAutoclick(previous => false)
         }
+
     }
     if (props.ifAutoclick === false) {
         clearInterval(props.intervalID)

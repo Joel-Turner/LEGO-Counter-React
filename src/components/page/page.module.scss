@@ -11,7 +11,7 @@
     padding: 12px 25px;
     color: colors.$black;
     text-align: center;
-    background-color: colors.$white;
+    background-image: image() ;
 
     @media screen and (min-width: layout.$sm) {
       flex-direction: row;

@@ -18,7 +18,7 @@ const Home = (): JSX.Element => {
     <Page title="Home">
       <Clicker clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
       <Shop clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
-      <Unclicker clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
+      {/* <Unclicker clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/> */}
       <Hero />
     </Page>
   )

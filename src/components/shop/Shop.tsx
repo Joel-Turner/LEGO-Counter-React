@@ -15,23 +15,19 @@ interface Props {
 }
 
 const Shop = (props:Props) => {
+
+    const [numAutoRun, setNumAutoRun] = useState<number>(0)
         
     const increaseClickIncrement = () => {
         if (props.timesClicked >= 100) {
             props.setClickIncrement(previous => previous + 1)
             props.setTimesClicked(previous => previous - 100)
-            if(props.activateOnce == true) {
-                clearInterval(props.intervalID)
-                props.setActivateOnce(previous => false)
-            }
+
         }
         if (props.timesClicked <= -100) {
             props.setClickIncrement(previous => previous + 1)
             props.setTimesClicked(previous => previous + 100)
-            if(props.activateOnce == true) {
-                clearInterval(props.intervalID)
-                props.setActivateOnce(previous => false)
-            }
+
         }
 
     }
@@ -39,6 +35,7 @@ const Shop = (props:Props) => {
     const activateAutoclick = () => {
         if (props.timesClicked >= 1000) {
             props.setIfAutoclick(previous => true)
+            setNumAutoRun(previous => previous +1)
             props.setTimesClicked(previous => previous - 1000)
         }
     }
@@ -46,12 +43,13 @@ const Shop = (props:Props) => {
     return (
         <div className={styles.upgradeShop}>
             <h2>Upgrades Shop</h2>
-            <div>
+            <div className={styles.increaseClickIncrement}>
                 <button onClick={increaseClickIncrement}>Increase Click Amount</button>
-                <p className={styles.incrementDesc}>Increases the number of LEGO Bricks earned per Click. Costs 100 Bricks. Current Click Amount is {props.clickIncrement}</p>
+                <p> The number of LEGO Bricks earned per Click. Costs 100 Bricks. Current Click Amount is {props.clickIncrement}</p>
             </div>
-            <div>
+            <div className={styles.activateAutoclick}>
                 <button onClick={activateAutoclick}>Autoclicker</button>
+                <p> Adds one LEGO Brick to the counter every second per Autoclicker. There are currently {numAutoRun} Autoclickers running</p>
             </div>
         </div>
     )

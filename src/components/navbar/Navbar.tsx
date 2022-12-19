@@ -5,12 +5,23 @@ import styles from './navbar.module.scss';
 const Navbar = (): JSX.Element => {
   return (
     <div className={styles.navbar}>
+
       <div className={styles.navContainer}>
-        <Link to="/">
-          {/* <h1 className={styles.titleText}>LEGO Clicker</h1> */}
+
+        <Link className={styles.image} to="/">
           <img src="/lego-icon.png" alt="Baseline" />
         </Link>
+
+        <div className={styles.titleText}>
+          <h1>LEGO Clicker</h1>
+        </div>
+
+        <Link className={styles.image} to="/">
+          <img src="/lego-icon.png" alt="Baseline" />
+        </Link>
+
       </div>
+
     </div>
   );
 };

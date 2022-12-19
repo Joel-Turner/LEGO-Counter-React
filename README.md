@@ -1,4 +1,16 @@
-# Baseline Webpage
+## Startup Using Ubuntu Ternimal
+
+cd /home/joel/react-lego
+
+npm start
+
+## Updating Cloudfront Caches
+
+npm run deploy:dev
+
+
+ 
+<!-- # Baseline Webpage
 
 A simple React static site that is deployed to AWS using serverless.
 
@@ -127,7 +139,7 @@ Optionally these can be used if dev and prod are in different accounts or the IA
 - PROD_AWS_ACCOUNT_ACCESS_KEY_ID = xxxx
 - PROD_AWS_ACCOUNT_SECRET_ACCESS_KEY = xxxx
 - NON_AWS_ACCOUNT_ACCESS_KEY_ID = xxxx
-- NON_AWS_ACCOUNT_SECRET_ACCESS_KEY = xxxx
+- NON_AWS_ACCOUNT_SECRET_ACCESS_KEY = xxxx -->
 
 ## Baseline
 

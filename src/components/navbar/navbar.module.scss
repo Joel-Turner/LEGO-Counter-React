@@ -3,40 +3,38 @@
 @use '../../styles/mixins';
 
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: layout.$navZIndex;
-  margin: auto;
-  padding: 30px 30px;
   background-color: colors.$greyLighter2;
 
   .navContainer {
-    img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
+    display: flex;
+    margin: 0px 20px;
+    .image {
+      display: flex;
+      flex: 0 1 100px;
+      img{
+        width:100% ;
+        object-fit: contain;
+      }
     }
-    // .titleText {
 
-    //}
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: layout.$maxWidth;
-    margin: auto;
+    .titleText {
+      flex: 1 1 100%;
+      text-align: center;
+    }
+    
   }
 }
 
-.mobile {
-  display: none;
-  @media screen and (max-width: layout.$md) {
-    display: flex;
-  }
+// .mobile {
+//   display: none;
+//   @media screen and (max-width: layout.$md) {
+//     display: flex;
+//   }
 
-  img {
-    width: 128px;
-    height: 96px;
-    object-fit: contain;
-  }
-}
+  // img {
+  //   width: 128px;
+  //   height: 96px;
+  //   object-fit: contain;
+  // }
+// }
+ 

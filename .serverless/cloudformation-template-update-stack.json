@@ -1,0 +1,202 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "react-lego dev",
+  "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ServerlessDeploymentBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "ServerlessDeploymentBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "WebsiteS3Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "react-lego-dev-bsln-web-16275",
+        "AccessControl": "PublicRead",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "index.html"
+        }
+      }
+    },
+    "WebsiteS3BucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "WebsiteS3Bucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Sid": "PublicReadGetObject",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": [
+                "s3:GetObject"
+              ],
+              "Resource": "arn:aws:s3:::react-lego-dev-bsln-web-16275/*"
+            }
+          ]
+        }
+      }
+    },
+    "WebsiteCloudFrontDistribution": {
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": {
+        "DistributionConfig": {
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "Origins": [
+            {
+              "DomainName": "react-lego-dev-bsln-web-16275.s3.ap-southeast-2.amazonaws.com",
+              "Id": "react-lego-dev-bsln-web-16275.s3.ap-southeast-2.amazonaws.com",
+              "CustomOriginConfig": {
+                "HTTPPort": 80,
+                "HTTPSPort": 443,
+                "OriginProtocolPolicy": "https-only"
+              }
+            }
+          ],
+          "DefaultRootObject": "/index.html",
+          "CustomErrorResponses": [
+            {
+              "ErrorCode": 404,
+              "ResponseCode": 200,
+              "ResponsePagePath": "/index.html"
+            }
+          ],
+          "DefaultCacheBehavior": {
+            "AllowedMethods": [
+              "GET",
+              "HEAD"
+            ],
+            "CachedMethods": [
+              "HEAD",
+              "GET"
+            ],
+            "Compress": true,
+            "DefaultTTL": 1800,
+            "MinTTL": 0,
+            "TargetOriginId": "react-lego-dev-bsln-web-16275.s3.ap-southeast-2.amazonaws.com",
+            "ForwardedValues": {
+              "QueryString": false,
+              "Cookies": {
+                "Forward": "none"
+              }
+            },
+            "ViewerProtocolPolicy": "redirect-to-https",
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+          },
+          "ViewerCertificate": {
+            "CloudFrontDefaultCertificate": true
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      },
+      "Export": {
+        "Name": "sls-react-lego-dev-ServerlessDeploymentBucketName"
+      }
+    },
+    "WebsiteUrl": {
+      "Description": "Cloudfront site URL",
+      "Value": {
+        "Fn::Join": [
+          "://",
+          [
+            "https",
+            {
+              "Fn::GetAtt": [
+                "WebsiteCloudFrontDistribution",
+                "DomainName"
+              ]
+            }
+          ]
+        ]
+      }
+    },
+    "WebsiteCloudFrontDistribution": {
+      "Description": "Cloudfront site URL",
+      "Value": {
+        "Fn::GetAtt": [
+          "WebsiteCloudFrontDistribution",
+          "DomainName"
+        ]
+      }
+    },
+    "CDNDistributionId": {
+      "Description": "CDN distribution id.",
+      "Value": {
+        "Ref": "WebsiteCloudFrontDistribution"
+      }
+    }
+  }
+}

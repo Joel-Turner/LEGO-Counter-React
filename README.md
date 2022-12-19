@@ -4,6 +4,17 @@ cd /home/joel/react-lego
 
 npm start
 
+## Git merging
+
+git add *
+
+git status (and add any missing files)
+
+git commit -m "**message**"
+
+git push
+
+Use *git status* if stuck
 ## Updating Cloudfront Caches
 
 npm run deploy:dev

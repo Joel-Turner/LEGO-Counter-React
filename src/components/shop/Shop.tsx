@@ -16,28 +16,46 @@ interface Props {
 
 const Shop = (props:Props) => {
 
+    useEffect(() => {
+        props.setClickIncrement(previous => parseInt(window.localStorage.getItem("clickIncrement")) || 1);
+    }, [])
+
     const [numAutoRun, setNumAutoRun] = useState<number>(0)
         
     const increaseClickIncrement = () => {
         if (props.timesClicked >= 100) {
             props.setClickIncrement(previous => previous + 1)
             props.setTimesClicked(previous => previous - 100)
-
+            window.localStorage.setItem('clickIncrement', String(props.clickIncrement + 1))
+            window.localStorage.setItem('timesClicked', String(props.timesClicked - 100))
         }
-        if (props.timesClicked <= -100) {
-            props.setClickIncrement(previous => previous + 1)
-            props.setTimesClicked(previous => previous + 100)
+        // if (props.timesClicked <= -100) {
+        //     props.setClickIncrement(previous => previous + 1)
+        //     props.setTimesClicked(previous => previous + 100)
 
-        }
+        // }
 
     }
 
     const activateAutoclick = () => {
         if (props.timesClicked >= 1000) {
+
             props.setIfAutoclick(previous => true)
             setNumAutoRun(previous => previous +1)
             props.setTimesClicked(previous => previous - 1000)
+
+            window.localStorage.setItem('timesClicked', String(props.timesClicked - 1000))
         }
+    }
+    const reset = () => {
+        props.setIfAutoclick(previous => false)
+        props.setTimesClicked(previous => 0)
+        props.setClickIncrement(previous => 1)
+
+        window.localStorage.setItem('timesClicked', String(0))
+        window.localStorage.setItem('ifAutoclick', String(false))
+        window.localStorage.setItem('clickIncrement', String(1))
+        location.reload()
     }
 
     return (
@@ -50,6 +68,10 @@ const Shop = (props:Props) => {
             <div className={styles.activateAutoclick}>
                 <button onClick={activateAutoclick}>Autoclicker</button>
                 <p> Adds one LEGO Brick to the counter every second per Autoclicker. There are currently {numAutoRun} Autoclickers running</p>
+            </div>
+            <div className={styles.reset}>
+                <button onClick={reset}>Reset </button>
+                <p> Resets <b>everything</b></p>
             </div>
         </div>
     )

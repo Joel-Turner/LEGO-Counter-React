@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Hero from '../components/hero/Hero';
 import Page from '../components/page/Page';
 import Clicker from "../components/clicker/Clicker"
@@ -13,6 +13,10 @@ const Home = (): JSX.Element => {
   const [ifAutoclick, setIfAutoclick] = useState<boolean>(false)
   const [activateOnce, setActivateOnce] = useState<boolean>(false)
   const [intervalID, setIntervalID] = useState<any>()
+
+  useEffect(() => {
+    console.log("ifAutoclick has changed")
+  }, [ifAutoclick])
 
   return (
     <Page title="Home">

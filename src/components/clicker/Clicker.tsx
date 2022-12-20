@@ -7,8 +7,6 @@ interface Props {
     setClickIncrement(arg: (old:number) => number): void;
     timesClicked: number
     setTimesClicked(arg: (old:number) => number): void;
-    ifAutoclick: boolean;
-    setIfAutoclick(arg: (old:boolean) => boolean): void;
     activateOnce: boolean;
     setActivateOnce(arg: (old:boolean) => boolean): void;
     intervalID: any;
@@ -44,7 +42,6 @@ const Clicker = (props:Props) => {
 
         props.setTimesClicked(previous => parseInt(window.localStorage.getItem("timesClicked")) || 0);
         props.setClickIncrement(previous => parseInt(window.localStorage.getItem("clickIncrement")) || 1);
-        props.setIfAutoclick(previous => (window.localStorage.getItem("ifAutoclick")) === "true" || false)
         props.setNumAutoRun(previous => parseInt((window.localStorage.getItem("numAutoRun"))) || 0)
 
         const AC = setInterval(() => {
@@ -62,13 +59,6 @@ const Clicker = (props:Props) => {
     const onButtonPress = () => {
         props.setTimesClicked(previous => previous + props.clickIncrement)
         window.localStorage.setItem('timesClicked', String(props.timesClicked + props.clickIncrement))
-    }
-
-    if (props.ifAutoclick === true) {
-        
-        props.setIfAutoclick(previous => false)
-        props.setNumAutoRun(previous => previous + 1)
-        window.localStorage.setItem('numAutoRun', String(props.numAutoRun))
     }
 
 

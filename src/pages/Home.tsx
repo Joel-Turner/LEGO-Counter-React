@@ -21,8 +21,8 @@ const Home = (): JSX.Element => {
 
   return (
     <Page title="Home">
-      <Clicker numAutoRun={numAutoRun} setNumAutoRun={setNumAutoRun} clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
-      <Shop numAutoRun={numAutoRun} setNumAutoRun={setNumAutoRun} clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
+      <Clicker numAutoRun={numAutoRun} setNumAutoRun={setNumAutoRun} clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
+      <Shop numAutoRun={numAutoRun} setNumAutoRun={setNumAutoRun} clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/>
       {/* <Unclicker clickIncrement={clickIncrement} setClickIncrement={setClickIncrement} timesClicked={timesClicked} setTimesClicked={setTimesClicked} ifAutoclick={ifAutoclick} setIfAutoclick={setIfAutoclick} activateOnce={activateOnce} setActivateOnce={setActivateOnce} intervalID={intervalID} setIntervalID={setIntervalID}/> */}
       <Hero />
     </Page>

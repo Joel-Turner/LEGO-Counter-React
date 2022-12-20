@@ -6,8 +6,6 @@ interface Props {
     setClickIncrement(arg: (old:number) => number): void;
     timesClicked: number
     setTimesClicked(arg: (old:number) => number): void;
-    ifAutoclick: boolean;
-    setIfAutoclick(arg: (old:boolean) => boolean): void;
     activateOnce: boolean;
     setActivateOnce(arg: (old:boolean) => boolean): void;
     intervalID: any;
@@ -40,9 +38,6 @@ const Shop = (props:Props) => {
 
     const activateAutoclick = () => {
         if (props.timesClicked >= 1000) {
-
-            // props.setIfAutoclick(previous => true)
-            // props.setIfAutoclick(previous => false)
             props.setNumAutoRun(previous => previous + 1)
             window.localStorage.setItem('numAutoRun', String(props.numAutoRun + 1))
             props.setTimesClicked(previous => previous - 1000)
@@ -51,13 +46,11 @@ const Shop = (props:Props) => {
         }
     }
     const reset = () => {
-        props.setIfAutoclick(previous => false)
         props.setTimesClicked(previous => 0)
         props.setClickIncrement(previous => 1)
         props.setNumAutoRun(previous => 0)
 
         window.localStorage.setItem('timesClicked', String(0))
-        window.localStorage.setItem('ifAutoclick', String(false))
         window.localStorage.setItem('clickIncrement', String(1))
         window.localStorage.setItem('numAutoRun', String(0))
         location.reload()
@@ -72,7 +65,7 @@ const Shop = (props:Props) => {
             </div>
             <div className={styles.activateAutoclick}>
                 <button onClick={activateAutoclick}>Autoclicker</button>
-                <p> Adds one LEGO Brick to the counter every second per Autoclicker. There are currently {props.numAutoRun} Autoclickers running</p>
+                <p> Adds one LEGO Brick to the counter every second per Autoclicker. Costs 1000 Bricks. There are currently {props.numAutoRun} Autoclickers running</p>
             </div>
             <div className={styles.reset}>
                 <button onClick={reset}>Reset </button>

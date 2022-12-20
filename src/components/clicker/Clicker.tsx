@@ -13,6 +13,8 @@ interface Props {
     setActivateOnce(arg: (old:boolean) => boolean): void;
     intervalID: any;
     setIntervalID(arg: (old:any) => any): void;
+    numAutoRun: number;
+    setNumAutoRun(arg: (old:number) => number): void;
 }
 
 const Clicker = (props:Props) => {
@@ -23,6 +25,18 @@ const Clicker = (props:Props) => {
     const [ifTrue, setIfTrue] = useState<boolean>(true)
     AC: Number;
 
+    const autoclick = () => {
+        setIfTrue(previous => !previous)
+    }
+
+    useEffect(() => {
+        if (ifTrue === false){
+            props.setTimesClicked(previous => previous + props.numAutoRun)
+            window.localStorage.setItem('timesClicked', String(props.timesClicked + props.numAutoRun))
+            setIfTrue(previous => true)
+        }
+    }, [ifTrue])
+
     
 
     useEffect(() => {
@@ -31,7 +45,11 @@ const Clicker = (props:Props) => {
         props.setTimesClicked(previous => parseInt(window.localStorage.getItem("timesClicked")) || 0);
         props.setClickIncrement(previous => parseInt(window.localStorage.getItem("clickIncrement")) || 1);
         props.setIfAutoclick(previous => (window.localStorage.getItem("ifAutoclick")) === "true" || false)
+        props.setNumAutoRun(previous => parseInt((window.localStorage.getItem("numAutoRun"))) || 0)
 
+        const AC = setInterval(() => {
+            autoclick()
+        }, 1000);
         // const IID = setInterval(() => {
         //     setTimerTime(previous => previous + 1)
         // }, 500)
@@ -46,25 +64,11 @@ const Clicker = (props:Props) => {
         window.localStorage.setItem('timesClicked', String(props.timesClicked + props.clickIncrement))
     }
 
-    const autoclick = () => {
-        setIfTrue(previous => !previous)
-    }
-
-    useEffect(() => {
-        if (ifTrue === false){
-            props.setTimesClicked(previous => previous + 1)
-            window.localStorage.setItem('timesClicked', String(props.timesClicked + 1))
-        }
-    }, [ifTrue])
-
     if (props.ifAutoclick === true) {
         
         props.setIfAutoclick(previous => false)
-        window.localStorage.setItem('ifAutoclick', String(true))
-
-        const AC = setInterval(() => {
-            autoclick()
-        }, 1000);
+        props.setNumAutoRun(previous => previous + 1)
+        window.localStorage.setItem('numAutoRun', String(props.numAutoRun))
     }
 
 
